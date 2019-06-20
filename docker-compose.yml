@@ -1,0 +1,25 @@
+---
+version: '2'
+services:
+
+  postgres:
+    image: 'postgres:11-alpine'
+    env_file: './envs/dev.env'
+    volumes:
+      - /srv/docker/mastermind/postgresql/data/:/var/lib/postgresql/data
+      - /srv/docker/mastermind/postgresql/log/:/var/log/postgresql
+    ports:
+      - '5432:5432'
+
+  backend:
+    image: 'mastermind/backend'
+    build: .
+    env_file: './envs/dev.env'
+    command: ["/bin/sh", "/exec/bootstrap.sh"]
+    volumes:
+      - ./mastermind:/code
+      - ./static:/static
+    ports:
+      - '8000:8000'
+    depends_on:
+      - postgres
