@@ -27,8 +27,7 @@ class MoveSerializer(serializers.ModelSerializer):
 class GameSerializer(serializers.ModelSerializer):
     moves_count = serializers.IntegerField(read_only=True)
     finished = serializers.BooleanField(read_only=True)
-    moves = MoveSerializer(read_only=True, many=True)
 
     class Meta:
         model = Game
-        fields = ('moves_count', 'finished', 'moves')
+        fields = ('moves_count', 'finished', 'updated')

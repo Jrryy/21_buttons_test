@@ -7,8 +7,14 @@ from game.models import Game, Move
 from game.utils import create_new_game
 
 
-class GameAPIView(GenericAPIView):
-    def post(self, request, *args, **kwargs):
+class GameAPIView(viewsets.GenericViewSet):
+    def list(self, request, *args, **kwargs):
+        user = request.user
+        queryset = user.games.all()
+        serializer = GameSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def create(self, request, *args, **kwargs):
         create_new_game(request.user)
 
         return Response('New game created.', status=status.HTTP_201_CREATED)
@@ -37,10 +43,10 @@ class MoveAPIView(viewsets.ModelViewSet):
             serializer = self.serializer_class(data=data)
             if serializer.is_valid():
                 guess = serializer.save()
-                response_serializer = self.serializer_class(guess)
-                if response_serializer.data['response_blacks'] == 4:
-                    response_serializer.data['message'] = 'You win!'
-                return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+                response_data = self.serializer_class(guess).data
+                if response_data['result_blacks'] == 4:
+                    response_data['message'] = 'You win!'
+                return Response(response_data, status=status.HTTP_201_CREATED)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Game.DoesNotExist:
