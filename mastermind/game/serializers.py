@@ -2,10 +2,10 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from game import choices
-from game.models import Game, Move
+from game.models import Game, Guess
 
 
-class MoveSerializer(serializers.ModelSerializer):
+class GuessSerializer(serializers.ModelSerializer):
     guess = serializers.ListField(
         child=serializers.IntegerField(min_value=0, max_value=len(choices.GUESS_PEG_COLOURS)),
         allow_empty=False,
@@ -20,14 +20,14 @@ class MoveSerializer(serializers.ModelSerializer):
         return value
 
     class Meta:
-        model = Move
+        model = Guess
         fields = ('guess', 'game', 'result_whites', 'result_blacks')
 
 
 class GameSerializer(serializers.ModelSerializer):
-    moves_count = serializers.IntegerField(read_only=True)
+    guesses_count = serializers.IntegerField(read_only=True)
     finished = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Game
-        fields = ('moves_count', 'finished', 'updated')
+        fields = ('guesses_count', 'finished', 'updated')

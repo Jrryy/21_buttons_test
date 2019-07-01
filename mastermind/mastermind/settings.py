@@ -32,8 +32,9 @@ DEBUG = is_trueish(os.getenv('DEBUG', True))
 
 ALLOWED_HOSTS = [h for h in (os.getenv('ALLOWED_HOSTS') or '').split(',') if h]
 
-APPEND_SLASH=False
+APPEND_SLASH = False
 
+DATETIME_FORMAT = '%Y-%m-%d, %H:%M'
 
 # Application definition
 
@@ -104,9 +105,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },

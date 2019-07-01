@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from game.models import Game, Move
+from game.models import Game, Guess
 
 
-class MoveInlineAdmin(admin.TabularInline):
-    model = Move
+class GuessInlineAdmin(admin.TabularInline):
+    model = Guess
     readonly_fields = ('guess', 'is_solution', 'result_whites', 'result_blacks', 'created',
                        'updated', 'game')
     extra = 0
@@ -12,10 +12,10 @@ class MoveInlineAdmin(admin.TabularInline):
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
-    readonly_fields = ('finished', 'moves_count', 'created', 'updated', 'player', 'created',
+    readonly_fields = ('finished', 'guesses_count', 'created', 'updated', 'player', 'created',
                        'updated')
-    list_display = ('__str__', 'player', 'finished', 'moves_count', 'created', 'updated')
-    inlines = (MoveInlineAdmin, )
+    list_display = ('__str__', 'player', 'finished', 'guesses_count', 'created', 'updated')
+    inlines = (GuessInlineAdmin, )
 
     class Meta:
         model = Game

@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.validators import UnicodeUsernameValidator
+from django.contrib.auth.validators import ASCIIUsernameValidator
 from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(max_length=150, validators=[UnicodeUsernameValidator])
+    username = serializers.CharField(max_length=150, validators=[ASCIIUsernameValidator()])
     password = serializers.CharField(
         max_length=128,
         write_only=True,
