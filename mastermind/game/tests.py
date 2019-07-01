@@ -1,8 +1,7 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-
 from django.test import TestCase
-from django.conf import settings
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.authtoken.models import Token
@@ -101,7 +100,11 @@ class GuessModelTest(TestCase):
 
         Guess.objects.create(game=game, guess=[ORANGE, PURPLE, YELLOW, BLUE], is_solution=True)
 
-        guess = Guess.objects.create(game=game, guess=[RED, PURPLE, BLUE, YELLOW], is_solution=False)
+        guess = Guess.objects.create(
+            game=game,
+            guess=[RED, PURPLE, BLUE, YELLOW],
+            is_solution=False
+        )
 
         self.assertFalse(guess.is_solution)
         self.assertEqual(guess.game, game)
@@ -242,7 +245,7 @@ class GameAPITest(APITestCase):
         make_guess_url = reverse('make-guess')
 
         game = Game.objects.create(player=self.user)
-        guess = Guess.objects.create(game=game, guess=[RED, BLUE, YELLOW, GREEN], is_solution=True)
+        Guess.objects.create(game=game, guess=[RED, BLUE, YELLOW, GREEN], is_solution=True)
 
         response = self.client.post(make_guess_url)
 

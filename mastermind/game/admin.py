@@ -15,7 +15,7 @@ class GameAdmin(admin.ModelAdmin):
     readonly_fields = ('finished', 'guesses_count', 'created', 'updated', 'player', 'created',
                        'updated')
     list_display = ('__str__', 'player', 'finished', 'guesses_count', 'created', 'updated')
-    inlines = (GuessInlineAdmin, )
+    inlines = (GuessInlineAdmin,)
 
     class Meta:
         model = Game

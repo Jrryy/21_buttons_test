@@ -1,12 +1,11 @@
-from django.core.exceptions import ValidationError
-
-from game.choices import GUESS_PEG_COLOURS
-
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
-from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
+
+from game.choices import GUESS_PEG_COLOURS
 
 
 class Game(models.Model):
@@ -30,7 +29,7 @@ class Game(models.Model):
                 f"{'finished' if self.finished else 'unfinished'}.")
 
     class Meta:
-        ordering = ('-updated', )
+        ordering = ('-updated',)
 
 
 class Guess(models.Model):

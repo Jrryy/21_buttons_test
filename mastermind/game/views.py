@@ -1,11 +1,10 @@
 from rest_framework import status, viewsets
-from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
-from game.serializers import GameSerializer, GuessSerializer
-from game.models import Game, Guess
-from game.utils import create_new_game
 from game.choices import GUESS_PEG_COLOURS
+from game.models import Game
+from game.serializers import GameSerializer, GuessSerializer
+from game.utils import create_new_game
 
 
 class GameAPIView(viewsets.GenericViewSet):
