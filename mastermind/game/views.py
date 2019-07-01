@@ -8,8 +8,6 @@ from game.utils import create_new_game
 
 
 class GameAPIView(GenericAPIView):
-    serializer_class = GameSerializer
-
     def post(self, request, *args, **kwargs):
         create_new_game(request.user)
 
@@ -39,7 +37,9 @@ class MoveAPIView(viewsets.ModelViewSet):
             serializer = self.serializer_class(data=data)
             if serializer.is_valid():
                 guess = serializer.save()
-                response_serializer = self.serializer_class(guess.game)
+                response_serializer = self.serializer_class(guess)
+                if response_serializer.data['response_blacks'] == 4:
+                    response_serializer.data['message'] = 'You win!'
                 return Response(response_serializer.data, status=status.HTTP_201_CREATED)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

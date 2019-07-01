@@ -68,6 +68,7 @@ class Move(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        self.full_clean()
         if not self.is_solution:
             self.result_whites = 0
             self.result_blacks = 0
