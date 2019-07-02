@@ -1,19 +1,19 @@
 # Mastermind REST API  
 ![Project's coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
 ## Index
-1. [Introduction](#Introduction)
-2. [Usage](#Usage)
-3. [API documentation](#API%20documentation)
-	3.1. [Open endpoints](#Open%20endpoints)
-		- [Register user](#Register%20user)
-		- [Obtain token](#Obtain%20token)
-	3.2. [Authenticated endpoints](#Authenticated%20endpoints)
-		-  [Create new game](#Create%20new%20game)
- 		-  [Make guess](#Make%20guess)
- 		-  [Show historic](#Show%20historic)
- 		-  [Show guesses](#Show%20guesses)
- 		-  [Show colours](#Show%20colours)
-4. [Technologies used](#Technologies%20used)
+1. [Introduction](#introduction)
+2. [Usage](#usage)
+3. [API documentation](#api%20documentation)
+	- [Open endpoints](#open%20endpoints)
+		- [Register user](#register%20user)
+		- [Obtain token](#obtain%20token)
+	- [Authenticated endpoints](#authenticated%20endpoints)
+		-  [Create new game](#create%20new%20game)
+ 		-  [Make guess](#make%20guess)
+ 		-  [Show historic](#show%20historic)
+ 		-  [Show guesses](#show%20guesses)
+ 		-  [Show colours](#show%20colours)
+4. [Technologies used](#technologies%20used)
 ## Introduction  
 
 This is a REST API to play the [Mastermind](https://en.wikipedia.org/wiki/Mastermind_\(board_game\)) game made in Python 3.6 and Django 2.2.   
