@@ -5,6 +5,9 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializer to create a user given their username and password.
+    """
     username = serializers.CharField(max_length=150, validators=[ASCIIUsernameValidator()])
     password = serializers.CharField(
         max_length=128,

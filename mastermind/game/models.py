@@ -9,6 +9,14 @@ from game.choices import GUESS_PEG_COLOURS
 
 
 class Game(models.Model):
+    """
+    The model that represents a game of mastermind. Fields:
+    finished: Boolean that indicates if the game is finished or not.
+    guesses_count: Amount of guesses the player has made.
+    created: Date and time when the game was created.
+    updated: Date and time when the game was last updated.
+    player: The user this game belongs to.
+    """
     # Fields
     finished = models.BooleanField(default=False)
     guesses_count = models.IntegerField(default=0)
@@ -33,6 +41,19 @@ class Game(models.Model):
 
 
 class Guess(models.Model):
+    """
+    The model that represents a solution to a game or a guess made by the player. Fields:
+    is_solution: boolean that indicates if the guess represents the solution of the game or has
+    been made by the player.
+    guess: List of 4 integers (according to the official rules) that represent a Mastermind code.
+    result_whites: Integer indicating the amount of white pegs given to a user's guess (Null if
+    is_solution is True)
+    result_whites: Integer indicating the amount of black pegs given to a user's guess (Null if
+    is_solution is True)
+    created: Date and time when the peg was created.
+    updated: Date and time when the peg was last updated (which should happen only once for guess).
+    game: Game instance for which this guess was made.
+    """
     # Fields
     is_solution = models.BooleanField(default=False)
     guess = ArrayField(models.SmallIntegerField(choices=GUESS_PEG_COLOURS))
@@ -48,6 +69,10 @@ class Guess(models.Model):
     )
 
     def clean(self):
+        """
+        Check for validation errors that are not in the fields' parameters: guesses of length 4
+        and uniqueness of a solution per Game instance.
+        """
         if self.guess and len(self.guess) != 4:
             raise ValidationError('This guess has an incorrect number of pegs. Please select 4.')
         if self.is_solution and self.game.guesses.filter(is_solution=True):
@@ -69,6 +94,12 @@ class Guess(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        """
+        Overrided save method because before saving a Guess instance, in case it is not the
+        solution, the white and black pegs have to be computed and saved too. This could be done
+        somewhere else. However, this way we ensure that every single guess that has been made
+        has its result too.
+        """
         self.full_clean()
         if not self.is_solution:
             self.result_whites = 0

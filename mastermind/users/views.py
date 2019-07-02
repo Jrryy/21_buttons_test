@@ -8,6 +8,10 @@ from users.serializers import UserSerializer
 
 
 class UserView(GenericAPIView):
+    """
+    View to create a new user, allows posting. It requires no authentication. Returns an error
+    400 in case the user already exists or the password is too weak.
+    """
     authentication_classes = ()
     permission_classes = ()
     serializer_class = UserSerializer

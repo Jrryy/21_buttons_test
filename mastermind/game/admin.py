@@ -4,6 +4,10 @@ from game.models import Game, Guess
 
 
 class GuessInlineAdmin(admin.TabularInline):
+    """
+    Inline admin for the Guesses of a game. The data is not modifiable by any means, just for
+    visualization.
+    """
     model = Guess
     readonly_fields = ('guess', 'is_solution', 'result_whites', 'result_blacks', 'created',
                        'updated', 'game')
@@ -18,6 +22,10 @@ class GuessInlineAdmin(admin.TabularInline):
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
+    """
+    Admin for the games. No data should be modified or added, so there are no modifiable fields,
+    the only possible action is deletion.
+    """
     readonly_fields = ('finished', 'guesses_count', 'created', 'updated', 'player', 'created',
                        'updated')
     list_display = ('__str__', 'player', 'finished', 'guesses_count', 'created', 'updated')
