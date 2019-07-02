@@ -9,6 +9,12 @@ class GuessInlineAdmin(admin.TabularInline):
                        'updated', 'game')
     extra = 0
 
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
@@ -16,6 +22,9 @@ class GameAdmin(admin.ModelAdmin):
                        'updated')
     list_display = ('__str__', 'player', 'finished', 'guesses_count', 'created', 'updated')
     inlines = (GuessInlineAdmin,)
+
+    def has_add_permission(self, request):
+        return False
 
     class Meta:
         model = Game
