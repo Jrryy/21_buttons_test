@@ -81,7 +81,7 @@ docker-compose exec backend ./run_tests.py
 ### Open endpoints
 Open endpoints require no authentication
 #### Register user
-Registers a new user providing their username and password. In case of success, it returns the user's authorization token.
+Registers a new user providing their username and password. In case of success, it returns the user's authorization token. The username allows only ASCII characters. The password must have at least 8 characters, must not be entirely numeric, and must not be too common (e.g. `abcd1234`) 
 - **URL**:
 	`/api/users/`
 - **Method**:
@@ -220,6 +220,17 @@ Makes a guess for the ongoing game, computing and returning the amount of white 
 		    "result_blacks": integer
 		}
 		```
+	    OR
+	- **Status code**: 201
+	- **Response content**:
+	    ```json
+	    {
+            "guess": [integer, integer, integer, integer],
+            "result_whites": 0,
+            "result_blacks": 4,
+            "message": "You win!"
+        }
+	    ```
 - **Error responses**:
     - **Status code**: 400
 	- **Response content**:
