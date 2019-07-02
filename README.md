@@ -54,22 +54,22 @@ docker-compose exec backend ./run_tests.py
 ```
 This makes use of the `coverage` module to test and output a report on the percentage of code that has been tested. Its output at the current state of the project is 
 ```
-Name					Stmts	Miss	Cover	Missing  
+Name			Stmts	Miss	Cover	Missing  
 ------------------------------------------------------  
-game/choices.py			7		0 		100%  
-game/models.py 			58 		0 		100%  
-game/serializers.py 	22 		0 		100%  
-game/urls.py 			3 		0 		100%  
-game/utils.py 			8		0 		100%  
-game/views.py 			43 		0 		100%  
-mastermind/settings.py 	24 		0 		100%  
-mastermind/urls.py 		6 		0 		100%  
-users/models.py 		8 		0 		100%  
-users/serializers.py 	14 		0 		100%  
-users/urls.py 			3 		0 		100%  
-users/views.py 			21 		0 		100%  
+game/choices.py		7	0 	100%  
+game/models.py 		58 	0 	100%  
+game/serializers.py 	22	0 	100%  
+game/urls.py 		3 	0 	100%  
+game/utils.py 		8	0 	100%  
+game/views.py 		43 	0 	100%  
+mastermind/settings.py 	24 	0 	100%  
+mastermind/urls.py 	6 	0 	100%  
+users/models.py 	8 	0 	100%  
+users/serializers.py 	14 	0 	100%  
+users/urls.py 		3 	0 	100%  
+users/views.py 		21 	0 	100%  
 ------------------------------------------------------  
-TOTAL 					217 	0 		100%
+TOTAL 			217 	0 	100%
 ```
 Before committing changes to the project, it is important to detect and correct all non passing tests and formatting issues. In order to detect them, execute
 ```bash
