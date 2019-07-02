@@ -82,24 +82,24 @@ docker-compose exec backend ./run_tests.py
 Open endpoints require no authentication
 #### Register user
 Registers a new user providing their username and password. In case of success, it returns the user's authorization token.
-- **URL**
+- **URL**:
 	`/api/users/`
-- **Method**
+- **Method**:
 	`POST`
-- **JSON Content**
+- **JSON Content**:
 	```json
 	{
 		"username": string (required),
 		"password": string (required)
 	}
 	```
-- **Success response**
+- **Success response**:
 	- **Status code**: 201
 	- **Response content**:  
 		```json
 		{"token": string}
 		```
-- **Error responses**
+- **Error responses**:
 	- **Status code**: 400
 	- **Response content**:
 		```json
@@ -148,24 +148,24 @@ Registers a new user providing their username and password. In case of success, 
 
 #### Obtain token
 Obtains a user's token given its username and password.
-- **URL**
+- **URL**:
 	`/api/api-token-auth/`
-- **Method**
+- **Method**:
 	`POST`
-- **JSON Content**
+- **JSON Content**:
 	```json
 	{
 		"username": string (required),
 		"password": string (required)
 	}
 	```
-- **Success response**
+- **Success response**:
 	- **Status code**: 200
 	- **Response content**:  
 		```json
 		{"token": string}
 		```
-- **Error response**
+- **Error response**:
 	- **Status code**: 400
 	- **Response content**:
 		```json
@@ -184,15 +184,15 @@ In order to be able to access the following endpoints, the calls must have the h
 	```
 #### Create new game
 Creates a new game for the user, finishing any saved game if there were any.
-- **URL**
+- **URL**:
 	`/api/new_game/`
-- **Method**
+- **Method**:
 	`POST`
-- **JSON Content**
+- **JSON Content**:
 	```json
 	{}
 	```
-- **Success response**
+- **Success response**:
 	- **Status code**: 201
 	- **Response content**:  
 		```json
@@ -200,17 +200,17 @@ Creates a new game for the user, finishing any saved game if there were any.
 		```
 #### Make guess
 Makes a guess for the ongoing game, computing and returning the amount of white and black pegs there would be for this guess.
-- **URL**
+- **URL**:
 	`/api/make_guess/`
-- **Method**
+- **Method**:
 	`POST`
-- **JSON Content**
+- **JSON Content**:
 	```json
 	{
 		"guess": [integer, integer, integer, integer] (required)
 	}
 	```
-- **Success response**
+- **Success response**:
 	- **Status code**: 201
 	- **Response content**:  
 		```json
@@ -220,7 +220,7 @@ Makes a guess for the ongoing game, computing and returning the amount of white 
 		    "result_blacks": integer
 		}
 		```
-- **Error response**
+- **Error responses**:
     - **Status code**: 400
 	- **Response content**:
 		```json
@@ -262,11 +262,11 @@ Makes a guess for the ongoing game, computing and returning the amount of white 
 		```
 #### Show historic
 Shows an historic of the games played by the user, ordered from most recent to most recent to oldest, and returning for every game the amount of guesses made by the user, if the game has been finished and when it was last played.
-- **URL**
+- **URL**:
 	`/api/historic/`
-- **Method**
+- **Method**:
 	`GET`
-- **Success response**
+- **Success response**:
 	- **Status code**: 200
 	- **Response content**:  
 		```json
@@ -281,11 +281,11 @@ Shows an historic of the games played by the user, ordered from most recent to m
 		```
 #### Show guesses
 Shows the guesses made in the ongoing game, ordered from the last to the first one, returning for every guess the code given, the number of black pegs and the number of white pegs.
-- **URL**
+- **URL**:
 	`/api/guesses/`
-- **Method**
+- **Method**:
 	`GET`
-- **Success response**
+- **Success response**:
 	- **Status code**: 200
 	- **Response content**:  
 		```json
@@ -298,6 +298,7 @@ Shows the guesses made in the ongoing game, ordered from the last to the first o
 			...
 		]
 		```
+- **Error response**:
 	- **Status code**: 400
 	- **Response content**:
 		```json
@@ -305,11 +306,11 @@ Shows the guesses made in the ongoing game, ordered from the last to the first o
 		```
 #### Show colours
 Returns the possible colours to choose from to form a guess, with a string representation for each one of them.
-- **URL**
+- **URL**:
 	`/api/colours/`
-- **Method**
+- **Method**:
 	`GET`
-- **Success response**
+- **Success response**:
 	- **Status code**: 200
 	- **Response content**:  
 		```json
